@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +31,7 @@ Route::get('/sign-out', [UserController::class, 'signout']);
 
 #User Pages (Member & Admin) -> Create Edit Delete Post, Create Edit Delete Comment, View Profile
 Route::middleware('auth')->group(function(){
-
+    Route::get('/profile/{username}', [UserController::class, 'profilePage']);
 });
 
 #Member Pages -> Edit Password

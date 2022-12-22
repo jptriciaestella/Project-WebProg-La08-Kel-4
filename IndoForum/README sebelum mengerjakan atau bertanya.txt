@@ -33,12 +33,13 @@ CONTROLLER:
 	- Create post: Masukkin request create post ke db
 	- Edit post page: Return view form edit post
 	- Edit post: Update request edit post ke db
-	- Delete
- 	- Show detail post: Return view detail post (dengan form comment dalem view ini)
-		return view('postdetail', compact('book', 'user'))
+	- Delete post
+ 	- Show detail post: termasuk form comment
 
 > Comment Controller: CRUD Controller
-	- Show Form create comment ada di dalam detail post, jadi tinggal ke DB aja.
+	- Show Form create comment ada di dalam detail post, jadi gak ada.
+	- Create comment: push comment ke db
+	- Show edit 
 	
 > Home Controller: Show All Post, pagination & filter
 

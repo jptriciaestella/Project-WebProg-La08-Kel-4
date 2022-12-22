@@ -28,15 +28,10 @@ class UserController extends Controller
 
         if(Auth::attempt($credentials, true)){
             Session::put('user-session', $credentials);
-            return redirect('/home');
+            return redirect('/');
         }
 
         return back()->withErrors('There is no credentials found in our database! Check your email or password.');
-    }
-
-    public function signout(){
-        Auth::logout();
-        return redirect('/');
     }
 
     public function signupPage(){
@@ -46,10 +41,8 @@ class UserController extends Controller
     public function signup(Request $request){
         $rules = [
             'username' => 'required|between:5,20|unique:users,username',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email:rfc,dns|unique:users,email',
             'password' => 'required|between:5,20',
-            'phoneNumber' => 'required|digits_between:10,13',
-            'address' => 'required|min:5'
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -62,15 +55,18 @@ class UserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'phone_number' => $request->phoneNumber,
-            'address' => $request->address,
         ]);
 
         return redirect('/')->with('success', 'Your account has been successfully created! Please sign in to continue.');
     }
 
-    public function profilePage($userId){
-        // $user => ambil dari userId
+    public function signout(){
+        Auth::logout();
+        return redirect('/');
+    }
+
+    public function profilePage($username){
+        // $user => ambil dari username
 
         // show profile page
         // return view('profilePage', compact($user))
@@ -84,6 +80,7 @@ class UserController extends Controller
                 <tampilin tombol logout>
             @endif
         */
+        return view('Member.profilePage');
     }
 
     public function editPasswordPage(){
