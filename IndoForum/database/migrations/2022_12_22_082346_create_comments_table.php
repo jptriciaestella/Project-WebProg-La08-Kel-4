@@ -21,6 +21,7 @@ class CreateCommentsTable extends Migration
             $table->foreign('post_id')->references('id')->on('posts');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->text('comment');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
