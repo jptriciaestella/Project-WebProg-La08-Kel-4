@@ -82,8 +82,7 @@ class UserController extends Controller
     }
 
     public function editPasswordPage(){
-        //show form edit password
-
+        return view('Member.editPassword');
     }
 
     public function editPassword(Request $request){

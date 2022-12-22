@@ -10,20 +10,20 @@ di terminal:
 
 PENTING!!
 > BUAT DI BRANCH BARU
-> Halaman Sign in Sign out hanya sementara, view bisa diperbagus.
+> SEMUA VIEW extends('Component.navbar'), liat contoh view yang udah jadi aja
 
 TODO:
 - Perbaiki view login signup (udah jalan tinggal viewnya)
 - Create update delete post
 - Create update delete comment
-- Controller show form update password dan update password
+- View editPassword, Controller editPassword (update password ke DB)
 
 DONE:
 - Middleware, tinggal diisi routing dalam groupnya
-- Login Signup
-- View Profile (pribadi dan orang lain)
+- Login Signup (Kecuali view)
+- View Profile (pribadi dan orang lain beserta postingannya)
 - View all post
-- view post detail & comment
+- View post detail & comment
 
 CRUD:
 Post: image optional, jadi validation bisa tipe filenya aja (mimes image). Image default udah di migration, no-image.jpg. Kalo kosong gak usah insert. (if request->file('productImage'){ insert DB, ada kolom image } else { insert DB, gak pake kolom image })

@@ -31,12 +31,16 @@ Route::get('/sign-out', [UserController::class, 'signout']);
 
 #User Pages (Member & Admin) -> Create Edit Delete Post, Create Edit Delete Comment, View Profile
 Route::middleware('auth')->group(function(){
+    #View Profile
     Route::get('/profile/{username}', [UserController::class, 'profilePage'])->name('profilePage');
 });
 
 #Member Pages -> Edit Password
 Route::middleware('member')->group(function(){
-    Route::post('/test', [UserController::class, 'editPassword']);
+    #Show edit password page
+    Route::get('/edit-password', [UserController::class, 'editPasswordPage']);
+    #Edit password
+    Route::post('/edit-password', [UserController::class, 'editPassword']);
 });
 
 #Admin Pages -> ??
