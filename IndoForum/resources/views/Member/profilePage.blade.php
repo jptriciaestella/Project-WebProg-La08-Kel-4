@@ -14,25 +14,45 @@
     </div>
     @endif
 
-    <h2>Profile</h2>
-    <div class="m-5"></div>
+    <h2 class="my-5">Profil Member</h2>
 
     @if ($user->id == Auth::user()->id)
-        <h6>Halo, {{$user->username}}</h6>
-        @if(Auth::user()->role == 'member')
-            <a href="/edit-password" class="btn btn-outline-primary">Edit Password</a>
+        <h5 class="font-weight-normal">Halo, <b>{{$user->username}}</b>!</h5 class="font-weight-normal">
+        <h5 class="font-weight-normal"><b>Email:</b> {{$user->email}}</h5 class="font-weight-normal">
+        <h5 class="font-weight-normal"><b>Bergabung sejak:</b> {{$user->created_at}}</h5 class="font-weight-normal">
+
+        <div class="d-flex my-5">
+            @if(Auth::user()->role == 'member')
+                <a href="/edit-password" class="btn btn-outline-primary" style="width: 250px; margin-right:50px">Ubah Password</a>
+            @endif
+            <form action="/sign-out" method="GET">
+                <input type="submit" value="Signout" class="btn btn-outline-danger" style="width: 250px">
+            </form>
+        </div>
+
+        <hr>
+        <h2 class="my-5">Postingan anda:</h2>
+        @if ($posts->count() == 0)
+            <h5 class="my-5 text-muted font-weight-normal">Belum ada postingan dari kamu. Ayo buat postingan pertamamu!</h5>
         @endif
-        <form action="/sign-out" method="GET">
-            <input type="submit" value="Signout" class="btn btn-outline-danger my-2 my-sm-0">
-        </form>
     @else
-        <h6>Username: {{$user->username}}</h6>
-        <h6>Email: {{$user->email}}</h6>
-        <h6>Bergabung sejak: {{$user->created_at}}</h6>
+        <h5 class="font-weight-normal"><b>Username:</b> {{$user->username}}</h5 class="font-weight-normal">
+        <h5 class="font-weight-normal"><b>Email:</b> {{$user->email}}</h5 class="font-weight-normal">
+        <h5 class="font-weight-normal"><b>Bergabung sejak:</b> {{$user->created_at}}</h5 class="font-weight-normal">
+
+        <hr>
+        <h2 class="my-5">Postingan dari user ini:</h2>
+        @if ($posts->count() == 0)
+            <h5 class="my-5 text-muted font-weight-normal">Belum ada postingan dari user ini.</h5>
+        @endif
     @endif
 
     @foreach ($posts as $post)
-        <h2>{{$post->title}}</h2>
+        @include('Component.postThumbnail')
     @endforeach
+
+    <div class="nav d-flex justify-content-center m-5">
+        {{$posts->withQueryString()}}
+    </div>
 
 @endsection

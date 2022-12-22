@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -70,18 +71,26 @@ class UserController extends Controller
         ->where('username','=', $username)
         ->first();
 
+        // $posts = Post::where('user_id', '=', $user->id)->paginate(8);
+
         $posts = DB::table('posts')
-        ->where('user_id','=', $user->id);
+        ->where('user_id','=', $user->id)
+        ->join('users', 'users.id', '=', 'posts.user_id')
+        ->paginate(8);
 
         return view('Member.profilePage', compact('user','posts'));
     }
 
     public function editPasswordPage(){
         //show form edit password
+
     }
 
     public function editPassword(Request $request){
-        //update password ke db
+        //update password ke db, return redirect ke profile dia dengan alert success
+
+
+        return redirect()->route('profilePage', ['username' => Auth::user()->username])->with('success','Password berhasil diubah!');
     }
 
 }

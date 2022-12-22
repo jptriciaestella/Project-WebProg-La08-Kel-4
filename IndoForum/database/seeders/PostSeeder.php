@@ -45,9 +45,7 @@ class PostSeeder extends Seeder
 
         DB::table('posts')->insert([
             'title' => 'WDYT? Cocok gak ya??',
-            'content' => 'Hitler katanya masuk Islam dan menikah dengan seorang Muslimah di hadapan seorang kiai di salah satu pesantren di Garut. Kemudian, ia pergi ke Lombok dan bekerja sebagai dokter dengan mengganti namanya menjadi dr. Poch. Uniknya, sampai sekarang, buku Garut Kota Illuminati bagi sebagian masyarakat Garut, ada yang peduli dan tidak. Bahkan, anggapan orang-orang mengenai Hitler mati di Garut menjadi sebuah aib bagi masyarakat Garut.
-
-            Jadi, apa benar Adolf Hitler mati di Garut?',
+            'content' => 'Admin gf x gw jadi bf, cocok gak? he he he he',
             'user_id' => 2,
         ]);
 

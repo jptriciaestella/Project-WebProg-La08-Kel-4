@@ -10,12 +10,22 @@ di terminal:
 
 PENTING!!
 > BUAT DI BRANCH BARU
-> Sebelum push delete storage link di public/storage
 > Halaman Sign in Sign out hanya sementara, view bisa diperbagus.
 
-CRUD:
-User: yang register cuma bisa member. Role user udah default di migration, pas registrasi role kosongin aja
+TODO:
+- Perbaiki view login signup (udah jalan tinggal viewnya)
+- Create update delete post
+- Create update delete comment
+- Controller show form update password dan update password
 
+DONE:
+- Middleware, tinggal diisi routing dalam groupnya
+- Login Signup
+- View Profile (pribadi dan orang lain)
+- View all post
+- view post detail & comment
+
+CRUD:
 Post: image optional, jadi validation bisa tipe filenya aja (mimes image). Image default udah di migration, no-image.jpg. Kalo kosong gak usah insert. (if request->file('productImage'){ insert DB, ada kolom image } else { insert DB, gak pake kolom image })
 
 MIDDLEWARE: udah dibuat tinggal dimasukkin di web.php, 
@@ -77,11 +87,3 @@ CEK USER UDAH KELOGIN DI VIEW: buat tombol add post, form comment
 @auth
     <div yang diliat user (member/admin)>
 @endauth
-
-VIEW PROFILE -> Profile sendiri sama liat profile orang lain pake halaman sama. Tapi kalo liat profile sendiri keluar tombol edit pw/logout.
-@if ($userId == Auth::user()->id) -> berarti profile tersebut punya user
-	@if(Auth::user()->role == 'Member') -> cuma member yg bisa edit pw, admin nggak
-		<tampilin tombol edit password>
-	@endif
-	<tampilin tombol logout>
-@endif
