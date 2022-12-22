@@ -21,12 +21,12 @@
         <h5 class="font-weight-normal"><b>Email:</b> {{$user->email}}</h5 class="font-weight-normal">
         <h5 class="font-weight-normal"><b>Bergabung sejak:</b> {{$user->created_at}}</h5 class="font-weight-normal">
 
-        <div class="d-flex my-5">
+        <div class="d-flex my-5 flex-wrap">
             @if(Auth::user()->role == 'member')
-                <a href="/edit-password" class="btn btn-outline-primary" style="width: 250px; margin-right:50px">Ubah Password</a>
+                <a href="/edit-password" class="btn btn-outline-primary my-1" style="width: 250px; margin-right:50px">Ubah Password</a>
             @endif
             <form action="/sign-out" method="GET">
-                <input type="submit" value="Signout" class="btn btn-outline-danger" style="width: 250px">
+                <input type="submit" value="Signout" class="btn btn-outline-danger my-1" style="width: 250px">
             </form>
         </div>
 

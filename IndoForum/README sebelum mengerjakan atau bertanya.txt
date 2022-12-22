@@ -15,12 +15,13 @@ PENTING!!
 TODO:
 - Perbaiki view login signup (udah jalan tinggal viewnya)
 - Create update delete post
+- GANTI href di postThumbnail.blade.php buat tombol update delete post
 - Create update delete comment
 - View editPassword, Controller editPassword (update password ke DB)
 
 DONE:
 - Middleware, tinggal diisi routing dalam groupnya
-- Login Signup (Kecuali view)
+- Login Signup (view belom sesuai figma)
 - View Profile (pribadi dan orang lain beserta postingannya)
 - View all post
 - View post detail & comment

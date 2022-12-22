@@ -12,14 +12,8 @@
         <a class="navbar-brand" href="/">
             <img src="{{asset('IndoForumLogo.png')}}" height="45px">
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-          </ul>
-          <div class="form-inline my-2 my-lg-0">
+        <div class="form-inline ms-auto">
             @guest
                 <a class="btn btn-light d-flex align-items-center px-4" href="/sign-in">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -36,7 +30,6 @@
             @auth
                 <a class="text-dark" href="/profile/{{Auth::user()->username}}">Hello, {{Auth::user()->username}}</a>
             @endauth
-          </div>
         </div>
       </nav>
 
