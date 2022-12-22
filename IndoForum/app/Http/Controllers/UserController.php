@@ -66,21 +66,14 @@ class UserController extends Controller
     }
 
     public function profilePage($username){
-        // $user => ambil dari username
+        $user = DB::table('users')
+        ->where('username','=', $username)
+        ->first();
 
-        // show profile page
-        // return view('profilePage', compact($user))
+        $posts = DB::table('posts')
+        ->where('user_id','=', $user->id);
 
-        /*
-        blade view profile:
-            @if ($userId == Auth::user()->id) -> berarti profile tersebut punya user
-                @if(Auth::user()->role == 'Member') -> cuma member yg bisa edit pw, admin nggak
-                    <tampilin tombol edit password>
-                @endif
-                <tampilin tombol logout>
-            @endif
-        */
-        return view('Member.profilePage');
+        return view('Member.profilePage', compact('user','posts'));
     }
 
     public function editPasswordPage(){
