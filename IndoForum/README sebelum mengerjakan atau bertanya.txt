@@ -10,7 +10,8 @@ di terminal:
 
 PENTING!!
 > BUAT DI BRANCH BARU
-> Sebelum push delete storage link di public/storage\
+> Sebelum push delete storage link di public/storage
+> Halaman Sign in Sign out hanya sementara, view bisa diperbagus.
 
 CRUD:
 User: yang register cuma bisa member. Role user udah default di migration, pas registrasi role kosongin aja
@@ -23,6 +24,25 @@ Route::middleware('auth') -> cuma bisa diakses member & admin
 Route::middleware('member') -> cuma bisa diakses member
 Route::middleware('admin') -> cuma bisa diakses admin
 
+CONTROLLER:
+> User Controller: Register, Login, Logout
+
+> Post Controller: CRUD Post
+	- Show all post: Return view all post
+	- Create post page: Return view form create post
+	- Create post: Masukkin request create post ke db
+	- Edit post page: Return view form edit post
+	- Edit post: Update request edit post ke db
+	- Delete
+ 	- Show detail post: Return view detail post (dengan form comment dalem view ini)
+		return view('postdetail', compact('book', 'user'))
+
+> Comment Controller: CRUD Controller
+	- Show Form create comment ada di dalam detail post, jadi tinggal ke DB aja.
+	
+> Home Controller: Show All Post, pagination & filter
+
+BLADE:
 NAMPILIN MENU/TOMBOL ADMIN DAN MEMBER YANG BEDA TAPI ADA DALAM SATU VIEW
 di viewnya:
 @if (Auth::user()->role == 'admin')
@@ -43,6 +63,11 @@ atau
 
 kombinasi sendiri.
 
+DELETE POST SENDIRI / ADMIN BISA DELETE POST SEMUA, edit juga sama
+@if (Auth::user()->role == 'admin' || $post->user_id == Auth::user()->id)
+	<div tombol delete/edit>
+@endif
+
 CEK USER UDAH KELOGIN DI VIEW: buat tombol add post, form comment
 @guest
     <div yang diliat guest>
@@ -52,22 +77,10 @@ CEK USER UDAH KELOGIN DI VIEW: buat tombol add post, form comment
     <div yang diliat user (member/admin)>
 @endauth
 
-CONTROLLER:
-> User Controller: Register, Login, Logout
-
-> Post Controller: CRUD Post
-	- Show all post: Return view all post
-	- Create post page: Return view form create post
-	- Create post: Masukkin request create post ke db
-	- Edit post page: Return view form edit post
-	- Edit post: Update request edit post ke db
-	- Delete
- 	- Show detail post: Return view detail post (dengan form comment dalem view ini)
-		return view('postdetail', compact('book', 'user'))
-
-> Comment Controller: CRUD Controller
-	- Show Form create comment ada di dalam detail post, jadi tinggal ke DB aja.
-	
-> Home Controller: Show All Post, pagination & filter
-
-
+VIEW PROFILE -> Profile sendiri sama liat profile orang lain pake halaman sama. Tapi kalo liat profile sendiri keluar tombol edit pw/logout.
+@if ($userId == Auth::user()->id) -> berarti profile tersebut punya user
+	@if(Auth::user()->role == 'Member') -> cuma member yg bisa edit pw, admin nggak
+		<tampilin tombol edit password>
+	@endif
+	<tampilin tombol logout>
+@endif

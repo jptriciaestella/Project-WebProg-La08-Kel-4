@@ -13,6 +13,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+#Welcome Page
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+#Auth Pages
+Route::get('/sign-in', [UserController::class, 'signinPage'])->name('sign-in');
+Route::post('/sign-in', [UserController::class, 'signin']);
+Route::get('/sign-up', [UserController::class, 'signupPage']);
+Route::post('/sign-up', [UserController::class, 'signup']);
+Route::get('/sign-out', [UserController::class, 'signout']);
+
+#Public Pages: View All Post (Home), View Detail Post
+
+
+#User Pages (Member & Admin) -> Create Edit Delete Post, Create Edit Delete Comment, View Profile
+Route::middleware('auth')->group(function(){
+
+});
+
+#Member Pages -> Edit Password
+Route::middleware('member')->group(function(){
+
+});
+
+#Admin Pages -> ??
+Route::middleware('admin')->group(function(){
+
 });
