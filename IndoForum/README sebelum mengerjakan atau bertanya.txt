@@ -11,12 +11,14 @@ di terminal:
 PENTING!!
 > BUAT DI BRANCH BARU
 > SEMUA VIEW extends('Component.navbar'), liat contoh view yang udah jadi aja
+> BOOTSTRAP 5
 
 TODO:
 - Perbaiki view login signup (udah jalan tinggal viewnya)
 - Create update delete post
+- GANTI href di home.blade.php buat tombol add post
 - GANTI href di postThumbnail.blade.php buat tombol update delete post
-- Create update delete comment
+- Create update delete comment (create form di postdetail.blade create, Auth.editcomment.blade edit)
 - View editPassword, Controller editPassword (update password ke DB)
 - Supaya aman, pas edit/delete post/comment di controller pastiin yang ngedit adalah yang punya post, sisanya redirect home (if post->user_id == Auth::user()->id {edit/delete} else {return redirect home})
 
