@@ -23,7 +23,7 @@ class CommentSeeder extends Seeder
         DB::table('comments')->insert([
             'post_id' => 1,
             'user_id' => 3,
-            'comment' => 'Hoax, hapus ya?'
+            'comment' => 'Hoax, saya yang hapus atau kamu yang hapus?'
         ]);
 
         DB::table('comments')->insert([

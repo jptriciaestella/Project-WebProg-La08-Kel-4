@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 #Welcome Page
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'showAllPosts']);
+Route::get('/category/{categoryId}', [HomeController::class, 'showAllPostsCat']);
 
 #Auth Pages
 Route::get('/sign-in', [UserController::class, 'signinPage'])->name('sign-in');

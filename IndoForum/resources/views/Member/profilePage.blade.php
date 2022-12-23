@@ -1,6 +1,6 @@
 @extends('Component.navbar')
 
-@section('document_title', 'IndoForum')
+@section('document_title', 'Profil')
 
 @section('body')
     <div class="m-5"></div>
@@ -38,7 +38,7 @@
     @else
         <h5 class="font-weight-normal"><b>Username:</b> {{$user->username}}</h5 class="font-weight-normal">
         <h5 class="font-weight-normal"><b>Email:</b> {{$user->email}}</h5 class="font-weight-normal">
-        <h5 class="font-weight-normal"><b>Bergabung sejak:</b> {{$user->created_at}}</h5 class="font-weight-normal">
+        <h5 class="font-weight-normal mb-5"><b>Bergabung sejak:</b> {{$user->created_at}}</h5 class="font-weight-normal">
 
         <hr>
         <h2 class="my-5">Postingan dari user ini:</h2>

@@ -18,6 +18,7 @@ TODO:
 - GANTI href di postThumbnail.blade.php buat tombol update delete post
 - Create update delete comment
 - View editPassword, Controller editPassword (update password ke DB)
+- Supaya aman, pas edit/delete post/comment di controller pastiin yang ngedit adalah yang punya post, sisanya redirect home (if post->user_id == Auth::user()->id {edit/delete} else {return redirect home})
 
 DONE:
 - Middleware, tinggal diisi routing dalam groupnya
@@ -27,7 +28,7 @@ DONE:
 - View post detail & comment
 
 CRUD:
-Post: image optional, jadi validation bisa tipe filenya aja (mimes image). Image default udah di migration, no-image.jpg. Kalo kosong gak usah insert. (if request->file('productImage'){ insert DB, ada kolom image } else { insert DB, gak pake kolom image })
+Post: image optional, jadi validation bisa tipe filenya aja (mimes image) gak pake required. Image default udah di migration, no-image.jpg. Kalo kosong gak usah insert. (if request->file('productImage'){ insert DB, ada kolom image } else { insert DB, gak pake kolom image })
 
 MIDDLEWARE: udah dibuat tinggal dimasukkin di web.php, 
 Route yang gak di dalem group -> bisa diakses ke publik
@@ -73,7 +74,7 @@ atau
 	<div yang diliat oleh SELAIN member>
 @endif
 
-kombinasi sendiri.
+kombinasi sendiri, liat di blade yang udah ada.
 
 DELETE POST SENDIRI / ADMIN BISA DELETE POST SEMUA, edit juga sama
 @if (Auth::user()->role == 'admin' || $post->user_id == Auth::user()->id)
