@@ -1,23 +1,10 @@
-<div class="card mb-3">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="{{('/storage/').$post->image}}" class="img-fluid rounded-start img-thumbnail" style="height: 200px; width:100%; object-fit: cover;" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body d-flex flex-column justify-content-center h-100">
-          <h5 class="card-title">{{$post->title}}</h5>
-            <span class="d-flex">
-                <p class="card-text text-truncate" style="max-height: 50px; max-width:80%; margin-right:5px">{{$post->content}}</p>
-                <a href="/post/{{$post->post_id}}" style="margin-left: 5px">Selengkapnya</a>
-            </span>
-          <p class="card-text"><small class="text-muted">Dibuat oleh {{$post->username}} pada {{$post->created_at}}</small></p>
-        </div>
-      </div>
-    </div>
+<div class="card my-3">
+    <div class="card-header">{{$comment->username}} <span class="text-muted ms-5">({{$comment->created_at}})</span></div>
+    <div class="card-body px-3 py-4">{{$comment->comment}}</div>
     @auth
-        @if ($post->user_id == Auth::user()->id || Auth::user()->role == 'admin')
-            <div class="position-absolute top-0 end-0" style="margin: 1rem">
-                @if ($post->user_id == Auth::user()->id)
+        @if ($comment->user_id == Auth::user()->id || Auth::user()->role == 'admin')
+            <div class="position-absolute bottom-0 end-0" style="margin: 1rem 2rem">
+                @if ($comment->user_id == Auth::user()->id)
                     {{-- GANTI HREF --}}
                     <a href="https://google.com" class="btn btn-outline-success rounded-circle" style="margin-right: 10px">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -35,4 +22,4 @@
             </div>
         @endif
     @endauth
-  </div>
+</div>

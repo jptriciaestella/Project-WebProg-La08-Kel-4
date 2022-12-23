@@ -12,12 +12,14 @@ class PostController extends Controller
         $post = DB::table('posts')
                 ->where('posts.id','=', $postId)
                 ->join('users', 'users.id', '=', 'posts.user_id')
-                ->select('*','users.id as user_id')
+                ->select('*','posts.id as post_id', 'users.id as user_id')
                 ->first();
 
         $comments = DB::table(('comments'))
                     ->join('users', 'users.id', '=', 'comments.user_id')
-                    ->where('post_id','=', $postId)->paginate(10);
+                    ->select('*','comments.id as comment_id', 'users.id as user_id')
+                    ->where('post_id','=', $postId)
+                    ->latest('comments.created_at')->paginate(10);
 
         return view('postDetail', compact('post', 'comments'));
 

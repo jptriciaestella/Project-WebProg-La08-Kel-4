@@ -12,13 +12,15 @@ PENTING!!
 > BUAT DI BRANCH BARU
 > SEMUA VIEW extends('Component.navbar'), liat contoh view yang udah jadi aja
 > BOOTSTRAP 5
+> KALO MAU pake QUERY JOIN, jangan nyebut id di view (ambigu, id di table sama), spesifikasiin di controller jadi post_id user_id dll (liat contoh di postcontroller)
 
 TODO:
 - Perbaiki view login signup (udah jalan tinggal viewnya)
-- Create update delete post
+- Create update delete post (termasuk view page form create post)
 - GANTI href di home.blade.php buat tombol add post
 - GANTI href di postThumbnail.blade.php buat tombol update delete post
-- Create update delete comment (create form di postdetail.blade create, Auth.editcomment.blade edit)
+- Create update delete comment (termasuk view create form di postdetail.blade create, Auth.editcomment.blade edit)
+- GANTI href di Component.comment.blade.php buat tombol update delete comment
 - View editPassword, Controller editPassword (update password ke DB)
 - Supaya aman, pas edit/delete post/comment di controller pastiin yang ngedit adalah yang punya post, sisanya redirect home (if post->user_id == Auth::user()->id {edit/delete} else {return redirect home})
 
