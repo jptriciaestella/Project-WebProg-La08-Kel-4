@@ -11,7 +11,7 @@ di terminal:
 PENTING!!
 > BUAT DI BRANCH BARU
 > SEMUA VIEW extends('Component.navbar'), liat contoh view yang udah jadi aja
-> BOOTSTRAP 5
+> Pakai BOOTSTRAP versi 5
 > KALO MAU pake QUERY JOIN, jangan nyebut id di view (ambigu, id di table sama), spesifikasiin di controller jadi post_id user_id dll (liat contoh di postcontroller)
 
 TODO:
