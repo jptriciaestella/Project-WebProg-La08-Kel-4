@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-#Welcome Page
-Route::get('/', [HomeController::class, 'showAllPosts']);
-Route::get('/category/{categoryId}', [HomeController::class, 'showAllPostsCat']);
-
 #Auth Pages
 Route::get('/sign-in', [UserController::class, 'signinPage'])->name('sign-in');
 Route::post('/sign-in', [UserController::class, 'signin']);
@@ -27,7 +24,9 @@ Route::post('/sign-up', [UserController::class, 'signup']);
 Route::get('/sign-out', [UserController::class, 'signout']);
 
 #Public Pages: View All Post (Home), View Detail Post
-
+Route::get('/', [HomeController::class, 'showAllPosts']);
+Route::get('/category/{categoryId}', [HomeController::class, 'showAllPostsCat']);
+Route::get('/post/{postId}', [PostController::class, 'showDetailPost']);
 
 #User Pages (Member & Admin) -> Create Edit Delete Post, Create Edit Delete Comment, View Profile
 Route::middleware('auth')->group(function(){

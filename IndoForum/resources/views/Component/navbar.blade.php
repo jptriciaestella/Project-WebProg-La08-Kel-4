@@ -33,7 +33,7 @@
         </div>
       </nav>
 
-    <div class="container">
+    <div class="container" style="@yield('body-styles')">
         @yield('body')
     </div>
 
