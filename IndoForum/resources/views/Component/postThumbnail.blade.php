@@ -8,7 +8,7 @@
           <h5 class="card-title">{{$post->title}}</h5>
             <span class="d-flex">
                 <p class="card-text text-truncate" style="max-height: 50px; max-width:80%; margin-right:5px">{{$post->content}}</p>
-                <a href="/post/{{$post->id}}" style="margin-left: 5px">Selengkapnya</a>
+                <a href="/post/{{$post->post_id}}" style="margin-left: 5px">Selengkapnya</a>
             </span>
           <p class="card-text"><small class="text-muted">Dibuat oleh {{$post->username}} pada {{$post->created_at}}</small></p>
         </div>

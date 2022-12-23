@@ -76,6 +76,8 @@ class UserController extends Controller
         $posts = DB::table('posts')
         ->where('user_id','=', $user->id)
         ->join('users', 'users.id', '=', 'posts.user_id')
+        ->select('*','posts.id as post_id')
+        ->latest('posts.created_at')
         ->paginate(8);
 
         return view('Member.profilePage', compact('user','posts'));

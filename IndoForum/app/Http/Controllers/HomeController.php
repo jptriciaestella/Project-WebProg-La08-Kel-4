@@ -11,6 +11,7 @@ class HomeController extends Controller
     public function showAllPosts(){
         $posts = DB::table('posts')
         ->join('users', 'users.id', '=', 'posts.user_id')
+        ->select('*','posts.id as post_id')
         ->latest('posts.created_at')->paginate(10);
 
         $categories = DB::table('categories')->get();
@@ -24,7 +25,9 @@ class HomeController extends Controller
         $posts = Post::with('category')
         ->whereHas('category', function($query) use ($categoryId){
             $query->where('category_id', $categoryId);
-        })->orderBy('posts.created_at','desc')->paginate(10);
+        })->join('users', 'users.id', '=', 'posts.user_id')
+        ->select('*','posts.id as post_id')
+        ->latest('posts.created_at')->paginate(10);
 
         $categories = DB::table('categories')->get();
 

@@ -12,6 +12,7 @@ class PostController extends Controller
         $post = DB::table('posts')
                 ->where('posts.id','=', $postId)
                 ->join('users', 'users.id', '=', 'posts.user_id')
+                ->select('*','users.id as user_id')
                 ->first();
 
         $comments = DB::table(('comments'))
