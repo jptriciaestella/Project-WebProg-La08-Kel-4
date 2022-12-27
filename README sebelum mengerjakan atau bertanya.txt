@@ -24,6 +24,12 @@ TODO:
 - View editPassword, Controller editPassword (update password ke DB)
 - Supaya aman, pas edit/delete post/comment di controller pastiin yang ngedit adalah yang punya post, sisanya redirect home (if post->user_id == Auth::user()->id {edit/delete} else {return redirect back})
 
+Pembagian
+- Edit view (view login signup) + buat view controller edit password -> mario
+- buat CRUD post  -> lawysen
+- buat CRUD komen -> komen
+- gabungin semua -> zaky
+
 DONE:
 - Middleware, tinggal diisi routing dalam groupnya
 - Login Signup (view belom sesuai figma)
