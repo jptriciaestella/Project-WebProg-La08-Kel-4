@@ -22,7 +22,7 @@ TODO:
 - Create update delete comment (termasuk view create form di postdetail.blade create, Auth.editcomment.blade edit)
 - GANTI href di Component.comment.blade.php buat tombol update delete comment
 - View editPassword, Controller editPassword (update password ke DB)
-- Supaya aman, pas edit/delete post/comment di controller pastiin yang ngedit adalah yang punya post, sisanya redirect home (if post->user_id == Auth::user()->id {edit/delete} else {return redirect home})
+- Supaya aman, pas edit/delete post/comment di controller pastiin yang ngedit adalah yang punya post, sisanya redirect home (if post->user_id == Auth::user()->id {edit/delete} else {return redirect back})
 
 DONE:
 - Middleware, tinggal diisi routing dalam groupnya
