@@ -22,7 +22,8 @@ TODO:
 - Create update delete comment (termasuk view create form di postdetail.blade create, Auth.editcomment.blade edit)
 - GANTI href di Component.comment.blade.php buat tombol update delete comment
 - View editPassword, Controller editPassword (update password ke DB)
-- Supaya aman, pas edit/delete post/comment di controller pastiin yang ngedit adalah yang punya post, sisanya redirect home (if post->user_id == Auth::user()->id {edit/delete} else {return redirect back})
+- Supaya aman, pas edit/delete post/comment di controller pastiin yang ngedit adalah yang punya post, sisanya redirect home (if post->user_id == Auth::user()->id {edit} else {return redirect back})
+(if post->user_id == Auth::user()->id || Auth::user()->role = 'admin' {delete} else {return redirect back})
 
 Pembagian
 - Edit view (view login signup) + buat view controller edit password -> mario
