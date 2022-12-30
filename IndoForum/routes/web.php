@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
@@ -32,6 +33,9 @@ Route::get('/post/{postId}', [PostController::class, 'showDetailPost']);
 Route::middleware('auth')->group(function(){
     #View Profile
     Route::get('/profile/{username}', [UserController::class, 'profilePage'])->name('profilePage');
+    #Edit Comment
+    Route::get('/edit-comment/{commentId}', [CommentController::class, 'editCommentPage']);
+    Route::post('/edit-comment/{commentId', [CommentController::class, 'editComment']);
 });
 
 #Member Pages -> Edit Password
@@ -40,9 +44,11 @@ Route::middleware('member')->group(function(){
     Route::get('/edit-password', [UserController::class, 'editPasswordPage']);
     #Edit password
     Route::post('/edit-password', [UserController::class, 'editPassword']);
+
 });
 
 #Admin Pages -> ??
 Route::middleware('admin')->group(function(){
+    Route::delete('/delete-comment/{commentId}', [CommentController::class, 'delete']);
 
 });
