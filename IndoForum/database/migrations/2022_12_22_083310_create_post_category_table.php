@@ -16,7 +16,7 @@ class CreatePostCategoryTable extends Migration
         Schema::enableForeignKeyConstraints();
         Schema::create('post_category', function (Blueprint $table) {
             $table->integer('post_id')->unsigned();
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
         });

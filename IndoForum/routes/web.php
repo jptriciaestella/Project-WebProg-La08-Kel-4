@@ -32,6 +32,11 @@ Route::get('/post/{postId}', [PostController::class, 'showDetailPost']);
 Route::middleware('auth')->group(function(){
     #View Profile
     Route::get('/profile/{username}', [UserController::class, 'profilePage'])->name('profilePage');
+    Route::get('/createPost', [PostController::class, 'createPost']);
+    Route::post('/insertData', [PostController::class, 'insert']);
+    Route::get('/updatePost/{postId}',[PostController::class, 'edit']);
+    Route::put('/updateData/{postId}',[PostController::class, 'update']);
+    Route::delete('/deleteData/{postId}', [PostController::class, 'delete']);
 });
 
 #Member Pages -> Edit Password
