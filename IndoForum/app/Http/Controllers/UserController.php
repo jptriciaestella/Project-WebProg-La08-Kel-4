@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -91,7 +93,77 @@ class UserController extends Controller
         //update password ke db, return redirect ke profile dia dengan alert success
 
 
-        return redirect()->route('profilePage', ['username' => Auth::user()->username])->with('success','Password berhasil diubah!');
-    }
 
+        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+            return redirect()->back()->with("error","Your current password does not match with the password.");
+        }
+
+        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+            return redirect()->back()->with("error","New Password cannot be same as your current password.");
+        }
+
+        $credentials = $request->validate([
+            'current-password' => 'required',
+            'new-password' => 'required|string|min:8|confirmed',
+        ]);
+
+        DB::table('users')
+            ->where('email', '=', Auth::user()->email)
+            ->update(['new-password' => bcrypt($request->newPassword)]);
+
+        return redirect('/profile')->with('success', 'Your account now has a new updated password!');
+
+
+
+        // if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+        //     // The passwords matches
+        //     return redirect()->back()->with("error","Your current password does not match with the password.");
+        // }
+
+        // if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+        //     // Current password and new password same
+        //     return redirect()->back()->with("error","New Password cannot be same as your current password.");
+        // }
+
+        // $validatedData = $request->validate([
+        //     'current-password' => 'required',
+        //     'new-password' => 'required|string|min:8|confirmed',
+        // ]);
+
+        // //Change Password
+        // $user = Auth::user();
+        // $user->password = bcrypt($request->get('new-password'));
+        // $user->save();
+
+        // return redirect()->back()->with("success","Password successfully changed!");
+
+
+
+
+        // $credentials = $request->validate([
+        //     'password' => ['required', 'between:5,20'],
+        // ]);
+
+        // $rules = [
+        //     'oldPassword' => 'required|between:5,20',
+        //     'newPassword' => 'required|between:5,20|confirmed',
+        // ];
+
+        // $validator = Validator::make($request->all(), $rules);
+
+        // if($validator->fails()){
+        //     return back()->withErrors($validator);
+        // }
+
+        // if(Hash::check($request->oldPassword, Auth::user()->password)){
+        //     DB::table('users')
+        //     ->where('email', '=', Auth::user()->email)
+        //     ->update([
+        //         'password' => bcrypt($request->newPassword)
+        //     ]);
+        //     return redirect('/profile')->with('success', 'Your account now has a new updated password!');
+        // }
+
+        // return back()->withErrors('Wrong Password!');
+    }
 }
