@@ -31,8 +31,8 @@ Route::get('/post/{postId}', [PostController::class, 'showDetailPost']);
 #User Pages (Member & Admin) -> Create Edit Delete Post, Create Edit Delete Comment, View Profile
 Route::middleware('auth')->group(function(){
     #View Profile
-    // Route::get('/profile/{username}', [UserController::class, 'profilePage'])->name('profilePage');
-    Route::get('/profile', [UserController::class, 'profilePage'])->name('profilePage');
+    Route::get('/profile/{username}', [UserController::class, 'profilePage'])->name('profilePage');
+    // Route::get('/profile', [UserController::class, 'profilePage'])->name('profilePage');
 });
 
 #Member Pages -> Edit Password

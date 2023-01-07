@@ -68,8 +68,9 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    public function profilePage(){
-        $username=Auth::user()->username;
+    public function profilePage($username){
+    // public function profilePage(){
+    //     $username=Auth::user()->username;
         $user = DB::table('users')
         ->where('username','=', $username)
         ->first();
