@@ -68,7 +68,8 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    public function profilePage($username){
+    public function profilePage(){
+        $username=Auth::user()->username;
         $user = DB::table('users')
         ->where('username','=', $username)
         ->first();
@@ -94,24 +95,24 @@ class UserController extends Controller
 
 
 
-        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-            return redirect()->back()->with("error","Your current password does not match with the password.");
-        }
+        // if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+        //     return redirect()->back()->with("error","Your current password does not match with the password.");
+        // }
 
-        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
-            return redirect()->back()->with("error","New Password cannot be same as your current password.");
-        }
+        // if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+        //     return redirect()->back()->with("error","New Password cannot be same as your current password.");
+        // }
 
-        $credentials = $request->validate([
-            'current-password' => 'required',
-            'new-password' => 'required|string|min:8|confirmed',
-        ]);
+        // $credentials = $request->validate([
+        //     'current-password' => 'required',
+        //     'new-password' => 'required|string|min:8|confirmed',
+        // ]);
 
-        DB::table('users')
-            ->where('email', '=', Auth::user()->email)
-            ->update(['new-password' => bcrypt($request->newPassword)]);
+        // DB::table('users')
+        //     ->where('email', '=', Auth::user()->email)
+        //     ->update(['new-password' => bcrypt($request->newPassword)]);
 
-        return redirect('/profile')->with('success', 'Your account now has a new updated password!');
+        // return redirect('/profile')->with('success', 'Your account now has a new updated password!');
 
 
 
@@ -144,26 +145,28 @@ class UserController extends Controller
         //     'password' => ['required', 'between:5,20'],
         // ]);
 
-        // $rules = [
-        //     'oldPassword' => 'required|between:5,20',
-        //     'newPassword' => 'required|between:5,20|confirmed',
-        // ];
 
-        // $validator = Validator::make($request->all(), $rules);
 
-        // if($validator->fails()){
-        //     return back()->withErrors($validator);
-        // }
+        $rules = [
+            'currentpassword' => 'required|between:5,20',
+            'newpassword' => 'required|required_with:newpasswordconfirm|same:newpasswordconfirm',
+        ];
 
-        // if(Hash::check($request->oldPassword, Auth::user()->password)){
-        //     DB::table('users')
-        //     ->where('email', '=', Auth::user()->email)
-        //     ->update([
-        //         'password' => bcrypt($request->newPassword)
-        //     ]);
-        //     return redirect('/profile')->with('success', 'Your account now has a new updated password!');
-        // }
+        $validator = Validator::make($request->all(), $rules);
 
-        // return back()->withErrors('Wrong Password!');
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        if(Hash::check($request->currentpassword, Auth::user()->password)){
+            DB::table('users')
+            ->where('email', '=', Auth::user()->email)
+            ->update([
+                'password' => bcrypt($request->newpassword)
+            ]);
+            return redirect('/profile')->with('success', 'Your account now has a new updated password!');
+        }
+
+        return back()->withErrors('Wrong Password!');
     }
 }
