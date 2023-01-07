@@ -11,19 +11,21 @@
     </div>
     <div class="col-md-4">
         <form class="form-signin" action="/sign-up" method="POST">
+        {{-- <form class="form-signin" action="/edit-password" method="POST"> --}}
             @csrf
+            {{-- @method("PATCH") --}}
             <div class="m-5"></div>
             <h1 class="mb-3 font-weight-bold text-left mb-5">Change Your Password</h1>
             <h5 class="mb-5 font-weight-light text-left mb-5">Feeling that your credentials are compromised? Update your login information</h5>
 
-            <label for="password" class="h5 mt-3">Re-enter Current Password</label>
-            <input type="password" id="current-password" name="oldPassword" class="form-control @error('password') is-invalid @enderror" placeholder="(Verify it's really you who's changing the password)" autofocus="">
+            <label for="password" class="h5 mt-3">Current Password</label>
+            <input type="password" id="current-password" name="oldPassword" class="form-control @error('password') is-invalid @enderror" placeholder="(Verify it's really you)" autofocus="">
 
             <label for="password" class="h5 mt-3">New Password</label>
-            <input type="password" id="new-password" name="newPassword" class="form-control @error('password') is-invalid @enderror" placeholder="(Set a new password for your account)" autofocus="">
+            <input type="password" id="new-password" name="newPassword" class="form-control @error('password') is-invalid @enderror" placeholder="(Set your new password)" autofocus="">
 
             <label for="password" class="h5 mt-3">Confirm New Password</label>
-            <input type="password" id="new-password-confirm" name="confirmNewPassword" class="form-control @error('password') is-invalid @enderror" placeholder="(Make sure that you did not mistype your new password)" autofocus="">
+            <input type="password" id="new-password-confirm" name="confirmNewPassword" class="form-control @error('password') is-invalid @enderror" placeholder="(To ensure no mistypes)" autofocus="">
 
             @if ($errors->any())
                 <p class="text-danger">{{$errors->first()}}</p>

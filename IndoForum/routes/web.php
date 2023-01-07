@@ -40,6 +40,7 @@ Route::middleware('member')->group(function(){
     Route::get('/edit-password', [UserController::class, 'editPasswordPage']);
     #Edit password
     Route::post('/edit-password', [UserController::class, 'editPassword']);
+    // Route::patch('/edit-password', [UserController::class, 'editPassword']);
 });
 
 #Admin Pages -> ??

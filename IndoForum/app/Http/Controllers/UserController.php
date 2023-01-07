@@ -34,7 +34,7 @@ class UserController extends Controller
             return redirect('/');
         }
 
-        return back()->withErrors('There is no credentials found in our database! Check your email or password.');
+        return back()->withErrors('There are no matching credentials found in our database! Please check your email or password.');
     }
 
     public function signupPage(){
