@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/updatePost/{postId}',[PostController::class, 'edit']);
     Route::put('/updateData/{postId}',[PostController::class, 'update']);
     Route::delete('/deleteData/{postId}', [PostController::class, 'delete']);
+    Route::post('/insertComment', [CommentController::class, 'insertComment']);
+    
 });
 
 #Member Pages -> Edit Password
