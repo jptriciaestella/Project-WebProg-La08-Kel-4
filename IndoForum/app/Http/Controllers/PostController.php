@@ -27,7 +27,8 @@ class PostController extends Controller
         $validateData = $request->validate([
             'title' => 'min:5',
             'content' => 'min:5',
-            'image' => 'image'
+            'image' => 'image',
+            'category' => 'required'
         ]);
 
         if($request->file('image')){
@@ -75,11 +76,18 @@ class PostController extends Controller
 
     public function edit($postId){
         $post = DB::table('posts')
-                ->where('posts.id','=', $postId)
-                ->join('users', 'users.id', '=', 'posts.user_id')
-                ->select('*','posts.id as post_id', 'users.id as user_id')
-                ->first();
-        return view('postUpdate',compact('post'));
+                    ->where('posts.id','=', $postId)
+                    ->join('users', 'users.id', '=', 'posts.user_id')
+                    ->select('*','posts.id as post_id', 'users.id as user_id')
+                    ->first();
+
+        if ($post->user_id == Auth::user()->id) {
+            return view('postUpdate',compact('post'));
+        }
+
+        else {
+            return redirect('/');
+        }
     }
 
     public function update(Request $request, $postId){
@@ -105,7 +113,7 @@ class PostController extends Controller
         return redirect("/post/$postId");
     }
 
-    public function delete(Post $post, $postId)
+    public function delete($postId)
     {
         //DELETE PRODUCT
         $post = DB::table('posts')
@@ -114,7 +122,14 @@ class PostController extends Controller
                 ->select('*','posts.id as post_id', 'users.id as user_id')
                 ->first();
 
-        Post::destroy($post->post_id);
-        return redirect('/')->with('sukses', 'Post berhasil di delete');
+        if ($post->user_id == Auth::user()->id || Auth::user()->role = 'admin') {
+            Post::destroy($post->post_id);
+            return redirect('/')->with('sukses', 'Post berhasil di delete');
+        }
+
+        else {
+            return redirect()->back();
+        }
+
     }
 }

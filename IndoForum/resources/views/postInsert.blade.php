@@ -34,6 +34,12 @@
             </label>
         @endforeach
     </div>
+
+    <div>
+        @if($errors->has('category'))
+            <div class="error text-danger">{{ $errors->first('category') }}</div>
+        @endif
+    </div>
 @endsection
 
 @section('submit_button')
