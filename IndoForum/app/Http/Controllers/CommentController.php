@@ -10,7 +10,13 @@ use Illuminate\Support\Facades\DB;
 class CommentController extends Controller
 {
     // - Create comment: push comment ke db
-    public function insertComment(Request $req){
+    public function insertComment(Request $req, $postid){
+
+        $validateData = $req->validate([
+            'comment' => 'min:5'
+        ]);
+
+        $validateData ['post_id'] = $postid;
 
         $comment = new Comment();
         $comment->comment = $req->comment;
@@ -20,5 +26,5 @@ class CommentController extends Controller
     }
 
     // - Show edit
-    
+
 }

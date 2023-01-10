@@ -8,7 +8,7 @@
 
             <div class="" style="margin: 15px">
                 <h5>Insert Comment</h5>
-                <form enctype="multipart/form-data" action="/insertComment" method="POST">
+                <form enctype="multipart/form-data" action="/insertComment/{{$post->post_id}}" method="POST">
                     @csrf
                     <input type="text" id="comment" class="form-control">
                     <br>

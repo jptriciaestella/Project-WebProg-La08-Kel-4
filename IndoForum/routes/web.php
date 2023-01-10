@@ -38,8 +38,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/updatePost/{postId}',[PostController::class, 'edit']);
     Route::put('/updateData/{postId}',[PostController::class, 'update']);
     Route::delete('/deleteData/{postId}', [PostController::class, 'delete']);
-    Route::post('/insertComment', [CommentController::class, 'insertComment']);
-    
+    Route::post('/insertComment/{postId}', [CommentController::class, 'insertComment']);
+
 });
 
 #Member Pages -> Edit Password
