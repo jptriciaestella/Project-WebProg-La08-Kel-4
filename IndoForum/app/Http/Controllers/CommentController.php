@@ -30,4 +30,11 @@ class CommentController extends Controller
 
     // - Show edit
 
+    public function delete($commentId){
+
+        DB::table('comments')->where('id','=',$commentId)->delete();
+
+        return redirect()->back()->with('sukses', 'Comment berhasil didelete');
+    }
+
 }

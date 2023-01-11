@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function(){
     Route::put('/updateData/{postId}',[PostController::class, 'update']);
     Route::delete('/deleteData/{postId}', [PostController::class, 'delete']);
     Route::post('/insertComment/{postId}', [CommentController::class, 'insertComment']);
+    Route::delete('/deleteComment/{commentId}', [CommentController::class, 'delete']);
 
 });
 
