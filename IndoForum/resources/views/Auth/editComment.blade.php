@@ -7,12 +7,11 @@
             <div class="" style="margin: 15px">
                 <h4>Edit Comment</h4>
                 <br>
-                <form enctype="multipart/form-data" action="/insertComment/{{$post->post_id}}" method="POST">
+                <form enctype="multipart/form-data" action="/updateCommentData/{{$post->post_id}}/{{$comment->comment_id}}" method="POST">
+                    {{method_field('PUT')}}
                     @csrf
-
                     <textarea name="comment" type="textarea" class="form-control"  id="comment" required>{{$comment -> comment}}</textarea>
                     <br>
-
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>

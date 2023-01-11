@@ -53,7 +53,7 @@ class CommentController extends Controller
         return view('Auth.editComment', compact('post', 'comments', 'comment'));
     }
 
-    public function update(Request $request, $commentId){
+    public function update(Request $request, $postId, $commentId){
 
         $validate = [
             'comment' => 'min:5'
@@ -65,12 +65,15 @@ class CommentController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        DB::table('comments')->where('id','=',$commentId)->delete([
-            'comment' => $request->comment,
+        DB::table('comments')->where('id','=',$commentId)->update([
+            'comment' => $request->comment
         ]);
 
-        return redirect()->back()->with('sukses', 'Comment berhasil diupdate');
+        // $request->session()->flash('sukses', "Edit Post Berhasil");
+        // return redirect()->back()->with('sukses', 'Comment berhasil diupdate');
+        return redirect("/post/$postId");
     }
+
 
     public function delete($commentId){
 

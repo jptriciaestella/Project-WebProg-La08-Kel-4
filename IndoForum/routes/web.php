@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/insertComment/{postId}', [CommentController::class, 'insertComment']);
     Route::delete('/deleteComment/{commentId}', [CommentController::class, 'delete']);
     Route::get('/updateComment/{postId}/{commentId}',[CommentController::class, 'edit']);
-    Route::put('/updateCommentData/{commentId}',[CommentController::class, 'update']);
+    Route::put('/updateCommentData/{postId}/{commentId}',[CommentController::class, 'update']);
 
 });
 
