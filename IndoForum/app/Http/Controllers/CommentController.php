@@ -18,9 +18,12 @@ class CommentController extends Controller
 
         $validateData ['post_id'] = $postid;
 
-        $comment = new Comment();
-        $comment->comment = $req->comment;
-        $comment->save();
+        $validateData ['user_id'] = auth()->user()->id;
+        // $comment = new Comment();
+        // $comment->comment = $req->comment;
+        // $comment->save();
+
+        Comment::create($validateData);
 
         return redirect()->back()->with('sukses', 'Comment baru berhasil dibuat');
     }
