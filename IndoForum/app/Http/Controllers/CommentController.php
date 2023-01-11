@@ -71,7 +71,7 @@ class CommentController extends Controller
 
         // $request->session()->flash('sukses', "Edit Post Berhasil");
         // return redirect()->back()->with('sukses', 'Comment berhasil diupdate');
-        return redirect("/post/$postId");
+        return redirect("/post/$postId")->with('sukses', 'Comment berhasil diupdate');
     }
 
 
