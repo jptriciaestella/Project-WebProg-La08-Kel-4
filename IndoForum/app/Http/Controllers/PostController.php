@@ -64,10 +64,10 @@ class PostController extends Controller
                 ->first();
 
         $comments = DB::table(('comments'))
-                    ->join('users', 'users.id', '=', 'comments.user_id')
-                    ->select('*','comments.id as comment_id', 'users.id as user_id')
-                    ->where('post_id','=', $postId)
-                    ->latest('comments.created_at')->paginate(10);
+                ->join('users', 'users.id', '=', 'comments.user_id')
+                ->select('*','comments.id as comment_id', 'users.id as user_id')
+                ->where('post_id','=', $postId)
+                ->latest('comments.created_at')->paginate(10);
 
         return view('postDetail', compact('post', 'comments'));
 

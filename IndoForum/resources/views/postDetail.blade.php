@@ -7,12 +7,15 @@
             {{-- ISI FORM KOMENTAR --}}
 
             <div class="" style="margin: 15px">
-                <h5>Insert Comment</h5>
+                <h4>Insert Comment</h4>
+                <br>
                 <form enctype="multipart/form-data" action="/insertComment/{{$post->post_id}}" method="POST">
                     @csrf
-                    <input type="text" id="comment" name="comment" class="form-control">
+                    {{-- <input type="textarea" id="comment" name="comment" class="form-control"> --}}
+                    <textarea name="comment" type="textarea" class="form-control"  id="comment" required></textarea>
                     <br>
-                    <input type="submit" value="Insert">
+                    {{-- <input type="submit" value="Insert"> --}}
+                    <button type="submit" class="btn btn-primary">Insert</button>
                 </form>
             </div>
         </div>
