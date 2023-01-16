@@ -9,6 +9,10 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'content','user_id','image'];
+
+    public $timestamps = false;
+
     public function category(){
         return $this->belongsToMany(Category::class, 'post_category', 'post_id', 'category_id');
     }

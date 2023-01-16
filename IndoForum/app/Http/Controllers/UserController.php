@@ -58,7 +58,9 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect('/')->with('success', 'Your account has been successfully created! Please sign in to continue.');
+        $request->session()->flash('sukses', "Your account has been successfully created! Please sign in to continue.");
+
+        return redirect('/');
     }
 
     public function signout(){
