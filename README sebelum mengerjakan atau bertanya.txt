@@ -1,6 +1,7 @@
 DARI GITHUB file .env hilang, buat .env baru dari .env.example (copas aja)
 
 > Buat database 'indoforum'
+> Pindahkan images pada root folder ke dalam storage>app>public untuk hasil seed yang maksimal
 
 di terminal:
 > composer update
