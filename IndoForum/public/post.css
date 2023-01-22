@@ -1,0 +1,21 @@
+#isi {
+    margin-top: 50px;
+    background-color: pink;
+}
+
+#isi form{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#gambar{
+    margin-right: 900px;
+}
+
+#tombol1{
+    margin-left: 1140px;
+}
+
+#kategori{
+    display: flex;
+}
