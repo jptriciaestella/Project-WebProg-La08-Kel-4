@@ -29,7 +29,6 @@
 
             @auth
                 <a class="text-dark" href="/profile/{{Auth::user()->username}}">Hello, {{Auth::user()->username}}</a>
-                {{-- <a class="text-dark" href="/profile">Hello, {{Auth::user()->username}}</a> --}}
             @endauth
         </div>
       </nav>

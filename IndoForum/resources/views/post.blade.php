@@ -1,13 +1,12 @@
 @extends('Component.navbar')
 
-{{-- @section('document_title', 'IndoForum') --}}
+@section('document_title', 'IndoForum')
 
 <link rel="stylesheet" href="./post.css">
 @section('body')
     <div id="isi">
 
         @yield('Judul')
-        {{-- <p id="title" class="d-flex flex-column align-items-center mt-4 fs-1 fw-bold">Create Post</p> --}}
 
         <form enctype="multipart/form-data" @yield('method') @yield('action') class="d-flex flex-column align-items-center">
             @csrf

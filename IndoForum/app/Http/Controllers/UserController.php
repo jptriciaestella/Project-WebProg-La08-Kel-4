@@ -71,13 +71,9 @@ class UserController extends Controller
     }
 
     public function profilePage($username){
-    // public function profilePage(){
-    //     $username=Auth::user()->username;
         $user = DB::table('users')
         ->where('username','=', $username)
         ->first();
-
-        // $posts = Post::where('user_id', '=', $user->id)->paginate(8);
 
         $posts = DB::table('posts')
         ->where('user_id','=', $user->id)
@@ -94,62 +90,6 @@ class UserController extends Controller
     }
 
     public function editPassword(Request $request){
-        //update password ke db, return redirect ke profile dia dengan alert success
-
-
-
-        // if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-        //     return redirect()->back()->with("error","Your current password does not match with the password.");
-        // }
-
-        // if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
-        //     return redirect()->back()->with("error","New Password cannot be same as your current password.");
-        // }
-
-        // $credentials = $request->validate([
-        //     'current-password' => 'required',
-        //     'new-password' => 'required|string|min:8|confirmed',
-        // ]);
-
-        // DB::table('users')
-        //     ->where('email', '=', Auth::user()->email)
-        //     ->update(['new-password' => bcrypt($request->newPassword)]);
-
-        // return redirect('/profile')->with('success', 'Your account now has a new updated password!');
-
-
-
-        // if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-        //     // The passwords matches
-        //     return redirect()->back()->with("error","Your current password does not match with the password.");
-        // }
-
-        // if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
-        //     // Current password and new password same
-        //     return redirect()->back()->with("error","New Password cannot be same as your current password.");
-        // }
-
-        // $validatedData = $request->validate([
-        //     'current-password' => 'required',
-        //     'new-password' => 'required|string|min:8|confirmed',
-        // ]);
-
-        // //Change Password
-        // $user = Auth::user();
-        // $user->password = bcrypt($request->get('new-password'));
-        // $user->save();
-
-        // return redirect()->back()->with("success","Password successfully changed!");
-
-
-
-
-        // $credentials = $request->validate([
-        //     'password' => ['required', 'between:5,20'],
-        // ]);
-
-
-
         $rules = [
             'currentpassword' => 'required|between:5,20',
             'newpassword' => 'required|required_with:newpasswordconfirm|same:newpasswordconfirm',
@@ -167,7 +107,10 @@ class UserController extends Controller
             ->update([
                 'password' => bcrypt($request->newpassword)
             ]);
-            return redirect('/profile')->with('success', 'Your account now has a new updated password!');
+
+            $user = Auth::user();
+
+            return redirect("/profile/{$user->username}")->with('success', 'Your account now has a new updated password!');
         }
 
         return back()->withErrors('Wrong Password!');

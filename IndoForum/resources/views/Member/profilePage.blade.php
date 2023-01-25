@@ -5,14 +5,14 @@
 @section('body')
     <div class="m-5"></div>
 
-    @if (Session::has('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success! </strong>{{Session::get('success')}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div id="informasi">
+        @if(session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{session('success')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
     </div>
-    @endif
 
     <h2 class="my-5">Profil Member</h2>
 

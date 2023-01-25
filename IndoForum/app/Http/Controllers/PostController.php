@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -19,7 +20,7 @@ class PostController extends Controller
                 ->select('*','posts.id as post_id', 'users.id as user_id', 'categories.id as categories_id');
 
         $kategori = DB::table('categories')->get();
-        return view('postInsert', compact('post','kategori'));
+        return view('Auth.postInsert', compact('post','kategori'));
     }
 
     public function insert(Request $request, Post $post){
@@ -32,7 +33,11 @@ class PostController extends Controller
         ]);
 
         if($request->file('image')){
-            $validateData['image'] = $request->file('image')->store('post-images');
+            $image = $request->file('image');
+            $imageName = $image->getClientOriginalName();
+
+            Storage::putFileAs('public/images', $image, $imageName);
+            $validateData['image'] = 'images/'.$imageName;
         }
 
         $validateData ['user_id'] = auth()->user()->id;
@@ -40,19 +45,6 @@ class PostController extends Controller
         $post = Post::create($validateData);
 
         $post->category()->attach($request->category);
-
-        // foreach ($request->isian as $key) {
-
-        //     // if (isset(isian[$key])) {
-        //         $insert = [
-        //             'post_id' => 1,
-        //             'category_id' => $request->isian[$key]
-        //         ];
-
-        //         DB::table('post_category')->insert($insert);
-        //     // }
-        //     // DB::table('post_category')->insert($insert);
-        // };
 
         return redirect("/")->with('sukses', 'Post baru berhasil dibuat');
     }
@@ -82,7 +74,7 @@ class PostController extends Controller
                     ->first();
 
         if ($post->user_id == Auth::user()->id) {
-            return view('postUpdate',compact('post'));
+            return view('Auth.postUpdate',compact('post'));
         }
 
         else {
@@ -115,7 +107,6 @@ class PostController extends Controller
 
     public function delete($postId)
     {
-        //DELETE PRODUCT
         $post = DB::table('posts')
                 ->where('posts.id','=', $postId)
                 ->join('users', 'users.id', '=', 'posts.user_id')
@@ -123,6 +114,11 @@ class PostController extends Controller
                 ->first();
 
         if ($post->user_id == Auth::user()->id || Auth::user()->role = 'admin') {
+            DB::table('post_category')
+            ->where('post_category.post_id','=', $postId)
+            ->join('posts','posts.id','=','post_category.post_id')
+            ->delete();
+
             Post::destroy($post->post_id);
             return redirect('/')->with('sukses', 'Post berhasil di delete');
         }
