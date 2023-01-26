@@ -20,10 +20,13 @@
             <input type="string" id="username" name="username" class="form-control @error('username') is-invalid @enderror" placeholder="(5-20 letters)" autofocus="" value="{{ old('username') }}">
 
             <label for="email" class="h5 mt-3">Email address</label>
-            <input type="string" id="email" name="email" class="form-control @error('email') is-invalid @enderror" autofocus="" value="{{ old('email') }}">
+            <input type="string" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="(valid and unique)" autofocus="" value="{{ old('email') }}">
 
             <label for="password" class="h5 mt-3">New Password</label>
-            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="5-20 characters" autofocus="">
+            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="(5-20 characters)" autofocus="">
+
+            <label for="password" class="h5 mt-3">Confirm New Password</label>
+            <input type="password" id="newpasswordconfirm" name="newpasswordconfirm" class="form-control @error('password') is-invalid @enderror" placeholder="(Reenter your password)" autofocus="">
 
             @if ($errors->any())
                 <p class="mt-5 text-danger">{{$errors->first()}}</p>

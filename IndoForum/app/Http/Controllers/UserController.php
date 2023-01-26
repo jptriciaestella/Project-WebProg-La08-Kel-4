@@ -45,7 +45,7 @@ class UserController extends Controller
         $rules = [
             'username' => 'required|between:5,20|unique:users,username',
             'email' => 'required|email:rfc,dns|unique:users,email',
-            'password' => 'required|between:5,20',
+            'password' => 'required|required_with:newpasswordconfirm|same:newpasswordconfirm',
         ];
 
         $validator = Validator::make($request->all(), $rules);

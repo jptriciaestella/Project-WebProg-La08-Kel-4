@@ -17,7 +17,7 @@
                 <h5 class="mb-5 font-weight-light text-left mb-5">Let's catch you up with the latest events around Indonesia!</h5>
 
                 <label for="email" class="h5">Email address</label>
-                <input type="string" name="email" id="email" class="form-control @error('email') is-invalid @enderror" autofocus="" value="{{Cookie::get('remember-email') !== null ? Cookie::get('remember-email') : ""}}">
+                <input type="string" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="(valid and unique)" autofocus="" value="{{Cookie::get('remember-email') !== null ? Cookie::get('remember-email') : ""}}">
 
                 <label for="password" class="h5 mt-3">Password</label>
                 <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="(5-20 characters)" autofocus=""  value="{{Cookie::get('remember-password') !== null ? Cookie::get('remember-password') : ""}}">
